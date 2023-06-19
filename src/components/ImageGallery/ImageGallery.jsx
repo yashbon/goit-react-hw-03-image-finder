@@ -2,6 +2,7 @@ import ImageGalleryItem from 'components/ImageGalleryItem/ImageGalleryItem';
 import { toast } from 'react-toastify';
 import { getImages } from 'components/services/getImages';
 import css from './ImageGallery.module.css';
+import { Loader } from 'components/Loader/Loader';
 
 const { Component } = require('react');
 
@@ -56,8 +57,7 @@ class ImageGallery extends Component {
     render() {
         return (
             <>
-                {this.state.isLoading && <p>Load...</p>}
-                {/* <h1>{this.props.searchText}</h1> */}
+                {this.state.isLoading && <Loader />}
                 {this.state.gallery && (
                     <ul className={css.ImageGallery}>
                         {this.state.gallery.map(item => (
@@ -70,11 +70,6 @@ class ImageGallery extends Component {
                         ))}
                     </ul>
                 )}
-                {/* <ul>
-                    {this.state.gallery.map(item => (
-                        <li>{item}</li>
-                    ))}
-                </ul> */}
             </>
         );
     }
