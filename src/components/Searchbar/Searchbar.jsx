@@ -21,7 +21,7 @@ export class Searchbar extends Component {
             toast.warn('Please enter key words for search');
             return;
         }
-        toast.success('Wow so easy!', { autoClose: 500 });
+        // toast.success('Wow so easy!', { autoClose: 500 });
         this.props.handleSearch(this.state.searchText);
     };
 
