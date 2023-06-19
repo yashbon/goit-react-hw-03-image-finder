@@ -4,6 +4,7 @@ import { getImages } from 'components/services/getImages';
 import css from './ImageGallery.module.css';
 import { Loader } from 'components/Loader/Loader';
 import Button from 'components/Button/Button';
+// import Modal from 'components/Modal/Modal';
 
 const { Component } = require('react');
 
@@ -13,6 +14,7 @@ class ImageGallery extends Component {
         page: 1,
         total: 0,
         isLoading: false,
+        showModal: false,
     };
 
     componentDidUpdate(prevProps, prevState) {
@@ -68,6 +70,12 @@ class ImageGallery extends Component {
         this.setState(({ page }) => ({ page: page + 1 }));
         console.log(this.state);
     };
+
+    togleModal = () => {
+        // console.log('click on photo');
+        this.setState(state => ({ showModal: !this.state.showModal }));
+    };
+
     render() {
         return (
             <>
@@ -81,12 +89,15 @@ class ImageGallery extends Component {
                                     largeImageURL={item.largeImageURL}
                                     description={item.tags}
                                     key={item.id}
+                                    onClick={this.togleModal}
+                                    showModal={this.state.showModal}
                                 />
                             ))}
                         </ul>
                         {this.state.total > this.state.page && (
                             <Button onLoadMore={this.hedleLoadMore} />
                         )}
+                        {/* {this.state.showModal && <Modal />} */}
                     </>
                 )}
             </>
