@@ -28,7 +28,6 @@ export class Searchbar extends Component {
     };
 
     render() {
-        console.log(this.props);
         return (
             <div className={css.Searchbar}>
                 <form className={css.SearchForm} onSubmit={this.handleSubmit}>
