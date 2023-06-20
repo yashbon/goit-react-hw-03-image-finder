@@ -24,6 +24,9 @@ export class Searchbar extends Component {
         // toast.success('Wow so easy!', { autoClose: 500 });
 
         this.props.handleSearch(this.state.searchText);
+        this.setState({ searchText: '' });
+        event.currentTarget.reset();
+        // console.log('state from SearchForm: ', this.state);
     };
 
     render() {

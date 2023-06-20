@@ -16,6 +16,7 @@ class ImageGallery extends Component {
         isLoading: false,
         showModal: false,
         largeImageURL: '',
+        // isNewSearch: true,
     };
 
     componentDidUpdate(prevProps, prevState) {
@@ -23,7 +24,6 @@ class ImageGallery extends Component {
             prevProps.searchText !== this.props.searchText ||
             prevState.page < this.state.page
         ) {
-            // console.lo   g('fetch from gallery');
             // fetch(
             //     'https://pixabay.com/api/?q=cat&page=1&key=35752647-f3bb72efc92106ef6393a7805&image_type=photo&orientation=horizontal&per_page=12'
             // )
@@ -34,24 +34,33 @@ class ImageGallery extends Component {
             //         response => this.setState({ gallery: [...response.hits] })
             //     );
             // const response = getImages(this.props.searchText, this.state.page)
-            this.setState({ isLoading: true });
+
+            // this.setState({ gallery: [] });
+            // this.setState({ isLoading: true });
+
             getImages(this.props.searchText, this.state.page)
-                // .then((response) => response.json())
                 .then(response => {
-                    // обробка успішного запиту
                     toast.success('Wow so easy!', { autoClose: 500 });
-                    // console.log(response);
-                    this.setState({
-                        gallery: [...prevState.gallery, ...response.hits],
-                    });
+
+                    prevProps !== this.props
+                        ? this.setState({ gallery: [...response.hits] })
+                        : this.setState({
+                              gallery: [...prevState.gallery, ...response.hits],
+                          });
+
+                    // this.setState({
+                    //     gallery: [...prevState.gallery, ...response.hits],
+                    // });
 
                     const totalPages = Math.round(response.totalHits / 12);
+                    if (!totalPages) {
+                        toast.info('Sorry, nothing was found!');
+                    }
                     this.setState({ total: totalPages });
                 })
                 .catch(function (error) {
                     // обробка помилки
-                    // console.log(error);
-
+                    console.log(error);
                     toast.error(error.message, {
                         autoClose: 5000,
                         theme: 'colored',
@@ -61,9 +70,6 @@ class ImageGallery extends Component {
                     // виконується завжди
                     this.setState({ isLoading: false });
                 });
-
-            // console.log(response);
-            // console.log(this.state);
         }
     }
 
