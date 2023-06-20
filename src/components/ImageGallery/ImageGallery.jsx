@@ -30,8 +30,6 @@ class ImageGallery extends Component {
             // )
             //     .then(response => response.json())
             //     .then(
-            //         // console.log,
-
             //         response => this.setState({ gallery: [...response.hits] })
             //     );
             // const response = getImages(this.props.searchText, this.state.page)
