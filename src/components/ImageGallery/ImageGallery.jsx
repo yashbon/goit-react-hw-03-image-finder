@@ -53,7 +53,7 @@ class ImageGallery extends Component {
                     // });
 
                     const totalPages = Math.round(response.totalHits / 12);
-                    if (!totalPages) {
+                    if (response.totalHits <= 0) {
                         toast.info('Sorry, nothing was found!');
                     }
                     this.setState({ total: totalPages });
