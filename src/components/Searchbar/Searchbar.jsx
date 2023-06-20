@@ -22,6 +22,7 @@ export class Searchbar extends Component {
             return;
         }
         // toast.success('Wow so easy!', { autoClose: 500 });
+
         this.props.handleSearch(this.state.searchText);
     };
 

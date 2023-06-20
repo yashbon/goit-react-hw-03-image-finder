@@ -23,7 +23,7 @@ class ImageGallery extends Component {
             prevProps.searchText !== this.props.searchText ||
             prevState.page < this.state.page
         ) {
-            // console.log('fetch from gallery');
+            // console.lo   g('fetch from gallery');
             // fetch(
             //     'https://pixabay.com/api/?q=cat&page=1&key=35752647-f3bb72efc92106ef6393a7805&image_type=photo&orientation=horizontal&per_page=12'
             // )

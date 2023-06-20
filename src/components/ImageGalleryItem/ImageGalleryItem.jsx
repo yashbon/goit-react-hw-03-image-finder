@@ -1,4 +1,3 @@
-// import Modal from 'components/Modal/Modal';
 import css from './ImageGalleryItem.module.css';
 
 const ImageGalleryItem = props => {
