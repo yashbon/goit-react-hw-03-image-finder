@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 
 import css from './Searchbar.module.css';
@@ -14,10 +15,8 @@ export class Searchbar extends Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        // console.log('from form', this.state);
 
         if (this.state.searchText.trim() === '') {
-            // alert('Please enter key words for search');
             toast.warn('Please enter key words for search');
             return;
         }
@@ -26,11 +25,10 @@ export class Searchbar extends Component {
         this.props.handleSearch(this.state.searchText);
         this.setState({ searchText: '' });
         event.currentTarget.reset();
-        // console.log('state from SearchForm: ', this.state);
     };
 
     render() {
-        // console.log(this.props);
+        console.log(this.props);
         return (
             <div className={css.Searchbar}>
                 <form className={css.SearchForm} onSubmit={this.handleSubmit}>
@@ -53,3 +51,7 @@ export class Searchbar extends Component {
         );
     }
 }
+
+Searchbar.propTypes = {
+    handleSearch: PropTypes.func,
+};

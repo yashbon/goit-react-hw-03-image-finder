@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import ImageGalleryItem from 'components/ImageGalleryItem/ImageGalleryItem';
 import { toast } from 'react-toastify';
 import { getImages } from 'components/services/getImages';
@@ -37,6 +38,7 @@ class ImageGallery extends Component {
 
             // this.setState({ gallery: [] });
             // this.setState({ isLoading: true });
+            this.setState({ isLoading: true });
 
             getImages(this.props.searchText, this.state.page)
                 .then(response => {
@@ -60,7 +62,7 @@ class ImageGallery extends Component {
                 })
                 .catch(function (error) {
                     // обробка помилки
-                    console.log(error);
+                    // console.log(error);
                     toast.error(error.message, {
                         autoClose: 5000,
                         theme: 'colored',
@@ -118,3 +120,7 @@ class ImageGallery extends Component {
 }
 
 export default ImageGallery;
+
+ImageGallery.propTypes = {
+    searchText: PropTypes.string,
+};
