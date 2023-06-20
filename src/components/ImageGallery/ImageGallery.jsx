@@ -4,7 +4,7 @@ import { getImages } from 'components/services/getImages';
 import css from './ImageGallery.module.css';
 import { Loader } from 'components/Loader/Loader';
 import Button from 'components/Button/Button';
-// import Modal from 'components/Modal/Modal';
+import Modal from 'components/Modal/Modal';
 
 const { Component } = require('react');
 
@@ -15,10 +15,10 @@ class ImageGallery extends Component {
         total: 0,
         isLoading: false,
         showModal: false,
+        largeImageURL: '',
     };
 
     componentDidUpdate(prevProps, prevState) {
-        // console.log(this.props);
         if (
             prevProps.searchText !== this.props.searchText ||
             prevState.page < this.state.page
@@ -66,14 +66,16 @@ class ImageGallery extends Component {
             // console.log(this.state);
         }
     }
+
     hedleLoadMore = event => {
         this.setState(({ page }) => ({ page: page + 1 }));
-        console.log(this.state);
     };
 
-    togleModal = () => {
-        // console.log('click on photo');
-        this.setState(state => ({ showModal: !this.state.showModal }));
+    togleModal = largeImageURL => {
+        this.setState(state => ({
+            showModal: !this.state.showModal,
+            largeImageURL: largeImageURL,
+        }));
     };
 
     render() {
@@ -90,14 +92,18 @@ class ImageGallery extends Component {
                                     description={item.tags}
                                     key={item.id}
                                     onClick={this.togleModal}
-                                    showModal={this.state.showModal}
                                 />
                             ))}
                         </ul>
                         {this.state.total > this.state.page && (
                             <Button onLoadMore={this.hedleLoadMore} />
                         )}
-                        {/* {this.state.showModal && <Modal />} */}
+                        {this.state.showModal && (
+                            <Modal
+                                largeImageURL={this.state.largeImageURL}
+                                closeModal={this.togleModal}
+                            />
+                        )}
                     </>
                 )}
             </>
